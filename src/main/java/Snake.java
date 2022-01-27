@@ -1,17 +1,14 @@
-public class Snake {
-    private Position posX;
-    private Position posY;
+import java.util.List;
 
-    public Snake(Position posX, Position posY) {
-        this.posX = posX;
-        this.posY = posY;
+public class Snake extends Position{
+    private List<Character> snakeBody;
+
+    public Snake(int x, int y, List<Character> snakeBody) {
+        super(x, y);
+        this.snakeBody = snakeBody;
     }
 
-    public Position getPosX() {
-        return posX;
-    }
-
-    public Position getPosY() {
-        return posY;
+    public List<Character> getSnakeBody() {
+        return snakeBody;
     }
 }

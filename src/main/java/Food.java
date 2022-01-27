@@ -1,17 +1,12 @@
-public class Food {
-    private Position posX;
-    private Position posY;
+public class Food extends Position{
+    private char food;
 
-    public Food(Position posX, Position posY) {
-        this.posX = posX;
-        this.posY = posY;
+    public Food(int x, int y, char food) {
+        super(x, y);
+        this.food = food;
     }
 
-    public Position getPosX() {
-        return posX;
-    }
-
-    public Position getPosY() {
-        return posY;
+    public char getFood() {
+        return food;
     }
 }
