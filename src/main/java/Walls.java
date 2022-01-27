@@ -1,17 +1,12 @@
-public class Walls {
-    private Position wallPosX;
-    private Position wallPosY;
+public class Walls extends Position {
+    private final char BLOCK;
 
-    public Walls(Position wallPosX, Position wallPosY) {
-        this.wallPosX = wallPosX;
-        this.wallPosY = wallPosY;
+    public Walls(int x, int y) {
+        super(x, y);
+        this.BLOCK = 'X';
     }
 
-    public Position getWallPosX() {
-        return wallPosX;
-    }
-
-    public Position getWallPosY() {
-        return wallPosY;
+    public char getBLOCK() {
+        return BLOCK;
     }
 }
