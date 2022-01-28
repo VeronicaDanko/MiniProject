@@ -6,6 +6,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -47,6 +48,27 @@ public class Main {
             terminal.putCharacter(wall.getBLOCK());
             terminal.flush();
         }
+
+        //RandomHeart
+
+        Random random = new Random();
+        int foodY = random.nextInt(6, 29);
+        int foodX = random.nextInt(1, 57);
+        Food food = new Food(foodX, foodY);
+        terminal.setCursorPosition(food.getX(), food.getY());
+        terminal.putCharacter(food.getHeart());
+        terminal.flush();
+
+        //mat får inte dyka upp på orm - hur löser vi detta?
+        //äpple ska försvinna när äpplet äts av orm
+        //äpple ska dyka upp igen när det ätits upp
+        //orm ska växa när äpplet äts
+
+
+
+
+
+
 
         KeyStroke latestKeyStroke = null;
 
