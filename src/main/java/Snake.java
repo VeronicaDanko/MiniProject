@@ -14,8 +14,10 @@ public class Snake extends Position {
     }
 
     public List<Position> initializeSnakeBody() {
-        List<Position> snakebody = new ArrayList();
-        snakebody.add();
+        List<Position> snakeBody = new ArrayList<>();
+        snakeBody.add(new Position(15, 15));
+        snakeBody.add(new Position(15, 16));
+        snakeBody.add(new Position(15, 17));
         return snakeBody;
     }
 }
