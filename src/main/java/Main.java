@@ -14,10 +14,19 @@ public class Main {
         terminal.setCursorVisible(false);
 
         List<Walls> walls = new ArrayList<>();
-        for(int i = 0; i < 58; i++) {
+        for (int i = 0; i < 58; i++) {
             walls.add(new Walls(i, 5));
         }
-        for(Walls wall : walls) {
+        for (int i = 0; i < 58; i++) {
+            walls.add(new Walls(i, 30));
+        }
+        for (int i = 5; i < 30; i++) {
+            walls.add(new Walls(0, i));
+        }
+        for (int i = 5; i < 30; i++) {
+            walls.add(new Walls(58, i));
+        }
+        for (Walls wall : walls) {
             terminal.setCursorPosition(wall.getX(), wall.getY());
             terminal.putCharacter(wall.getBLOCK());
             terminal.flush();
