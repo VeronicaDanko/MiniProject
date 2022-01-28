@@ -1,4 +1,5 @@
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
@@ -13,6 +14,7 @@ public class Main {
         Terminal terminal = terminalFactory.createTerminal();
         terminal.setCursorVisible(false);
 
+        // Setup gameboard
         List<Walls> walls = new ArrayList<>();
         for (int i = 0; i < 58; i++) {
             walls.add(new Walls(i, 5));
@@ -30,6 +32,49 @@ public class Main {
             terminal.setCursorPosition(wall.getX(), wall.getY());
             terminal.putCharacter(wall.getBLOCK());
             terminal.flush();
+        }
+
+        KeyStroke latestKeyStroke = null;
+
+        boolean continueReadingInput = true;
+        while (continueReadingInput) {
+
+            int index = 0;
+            KeyStroke keyStroke = null;
+            do {
+                index++;
+                if (index % 100 == 0) {
+                    if (latestKeyStroke != null) {
+                        handlePlayer(snake, latestKeyStroke, terminal);
+                    }
+                }
+
+                Thread.sleep(5); // might throw InterruptedException
+                keyStroke = terminal.pollInput();
+
+
+            } while (keyStroke == null);
+            latestKeyStroke = keyStroke;
+
+
+        }
+
+    }
+    private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal) throws Exception {
+        Position oldPosition = new Position(snake.getX(), snake.getY());
+        switch (keyStroke.getKeyType()) {
+            case ArrowDown:
+                snake.getY() += 1;
+                break;
+            case ArrowUp:
+                snake.getY() -= 1;
+                break;
+            case ArrowLeft:
+                snake.getX() -=1;
+                break;
+            case ArrowRight:
+                snake.getX() +=1;
+                break;
         }
     }
 }
