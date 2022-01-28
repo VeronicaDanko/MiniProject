@@ -84,4 +84,13 @@ public class Main {
 
         terminal.flush();
     }
+
+    private static boolean isSnakeAlive(Snake snake, List<Walls> walls) {
+        for (Walls wall : walls) {
+            if(wall.getX() == snake.getX() && wall.getY() == snake.getY()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
