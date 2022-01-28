@@ -5,6 +5,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -35,6 +36,15 @@ public class Main {
             terminal.putCharacter(wall.getBLOCK());
             terminal.flush();
         }
+
+        //RandomHeart
+
+        Random random = new Random();
+        Character c = ' '; //gör att äpplet försvinner
+        Food food = new Food(5, 5);
+
+
+
 
         KeyStroke latestKeyStroke = null;
 
