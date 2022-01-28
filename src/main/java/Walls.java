@@ -3,7 +3,7 @@ public class Walls extends Position {
 
     public Walls(int x, int y) {
         super(x, y);
-        this.BLOCK = 'X';
+        this.BLOCK = '\u2588';
     }
 
     public char getBLOCK() {
