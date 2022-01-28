@@ -76,5 +76,12 @@ public class Main {
                 snake.getX() +=1;
                 break;
         }
+        terminal.setCursorPosition(oldPosition.getX(), oldPosition.getY());
+        terminal.putCharacter(' ');
+
+        terminal.setCursorPosition(snake.getX(), snake.getY());
+        terminal.putCharacter('\u263a');
+
+        terminal.flush();
     }
 }
