@@ -76,5 +76,21 @@ public class Main {
                 snake.getX() +=1;
                 break;
         }
+        terminal.setCursorPosition(oldPosition.getX(), oldPosition.getY());
+        terminal.putCharacter(' ');
+
+        terminal.setCursorPosition(snake.getX(), snake.getY());
+        terminal.putCharacter('\u263a');
+
+        terminal.flush();
+    }
+
+    private static boolean isSnakeAlive(Snake snake, List<Walls> walls) {
+        for (Walls wall : walls) {
+            if(wall.getX() == snake.getX() && wall.getY() == snake.getY()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
