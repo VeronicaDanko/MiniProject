@@ -138,6 +138,9 @@ public class Main {
                 return false;
             }
         }
+        if (snake.getFirst().getX() == snake.getPrevious().getX() && snake.getFirst().getY() == snake.getPrevious().getY()) {
+            return false;
+        }
         return true;
     }
 
