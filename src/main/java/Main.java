@@ -4,7 +4,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -93,34 +92,34 @@ public class Main {
         switch (keyStroke.getKeyType()) {
             case ArrowDown:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()+1));
-                if(snakeEatApple(food, snake) == false) {
-                    snake.getSnakeBody().remove(oldPosition);
-                } else {
+                if(snakeEatApple(food, snake)) {
                     generateFood(terminal);
+                } else {
+                    snake.getSnakeBody().remove(oldPosition);
                 }
                 break;
             case ArrowUp:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()-1));
-                if(snakeEatApple(food, snake) == false) {
-                    snake.getSnakeBody().remove(oldPosition);
-                } else {
+                if(snakeEatApple(food, snake)) {
                     generateFood(terminal);
+                } else {
+                    snake.getSnakeBody().remove(oldPosition);
                 }
                 break;
             case ArrowLeft:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()-1, firstPosition.getY()));
-                if(snakeEatApple(food, snake) == false) {
-                    snake.getSnakeBody().remove(oldPosition);
-                } else {
+                if(snakeEatApple(food, snake)) {
                     generateFood(terminal);
+                } else {
+                    snake.getSnakeBody().remove(oldPosition);
                 }
                 break;
             case ArrowRight:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()+1, firstPosition.getY()));
-                if(snakeEatApple(food, snake) == false) {
-                    snake.getSnakeBody().remove(oldPosition);
-                } else {
+                if(snakeEatApple(food, snake)) {
                     generateFood(terminal);
+                } else {
+                    snake.getSnakeBody().remove(oldPosition);
                 }
                 break;
         }
@@ -154,7 +153,8 @@ public class Main {
     public static boolean snakeEatApple(Food food, Snake snake) {
         if(food.getX() == snake.getFirst().getX() && food.getY() == snake.getFirst().getY()) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 }
