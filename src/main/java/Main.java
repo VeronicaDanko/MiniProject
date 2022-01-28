@@ -52,15 +52,6 @@ public class Main {
         }
 
 
-        //mat får inte dyka upp på orm - hur löser vi detta?
-        //äpple ska försvinna när äpplet äts av orm
-        //äpple ska dyka upp igen när det ätits upp
-        //orm ska växa när äpplet äts
-
-
-
-
-
         KeyStroke latestKeyStroke = null;
 
         boolean continueReadingInput = true;
@@ -73,6 +64,9 @@ public class Main {
                 if (index % 100 == 0) {
                     if (latestKeyStroke != null) {
                         handlePlayer(userSnake, latestKeyStroke, terminal, food);
+
+                        if(!isSnakeAlive(userSnake, walls)){
+                            terminal.close(); }
                     }
                 }
 
