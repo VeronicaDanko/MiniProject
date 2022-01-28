@@ -50,6 +50,9 @@ public class Main {
             terminal.flush();
         }
 
+
+
+
         generateFood(terminal);
 
         //mat får inte dyka upp på orm - hur löser vi detta?
@@ -73,6 +76,9 @@ public class Main {
                 if (index % 100 == 0) {
                     if (latestKeyStroke != null) {
                         handlePlayer(userSnake, latestKeyStroke, terminal);
+
+                        if(!isSnakeAlive(userSnake, walls)){
+                            terminal.close(); }
                     }
                 }
 
@@ -92,16 +98,16 @@ public class Main {
         Position firstPosition = snake.getFirst();
         switch (keyStroke.getKeyType()) {
             case ArrowDown:
-                snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()+1));
+                snake.getSnakeBody().add(0, new Position(firstPosition.getX(), firstPosition.getY() + 1));
                 break;
             case ArrowUp:
-                snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()-1));
+                snake.getSnakeBody().add(0, new Position(firstPosition.getX(), firstPosition.getY() - 1));
                 break;
             case ArrowLeft:
-                snake.getSnakeBody().add(0,new Position(firstPosition.getX()-1, firstPosition.getY()));
+                snake.getSnakeBody().add(0, new Position(firstPosition.getX() - 1, firstPosition.getY()));
                 break;
             case ArrowRight:
-                snake.getSnakeBody().add(0,new Position(firstPosition.getX()+1, firstPosition.getY()));
+                snake.getSnakeBody().add(0, new Position(firstPosition.getX() + 1, firstPosition.getY()));
                 break;
         }
         terminal.setCursorPosition(oldPosition.getX(), oldPosition.getY());
@@ -111,12 +117,17 @@ public class Main {
         terminal.putCharacter('S');
 
         terminal.flush();
+
+
     }
 
-    private static boolean isSnakeAlive(Snake snake, List<Walls> walls) {
+
+
+
+    private static boolean isSnakeAlive (Snake snake, List<Walls> walls) throws Exception {
         for (Walls wall : walls) {
             if(wall.getX() == snake.getFirst().getX() && wall.getY() == snake.getFirst().getY()) {
-                return false;
+               return false;
             }
         }
         return true;
@@ -130,4 +141,6 @@ public class Main {
         terminal.putCharacter(food.getHeart());
         terminal.flush();
     }
+
+
 }
