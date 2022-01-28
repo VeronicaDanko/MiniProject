@@ -133,6 +133,11 @@ public class Main {
                 return false;
             }
         }
+        for (int i = 1; i < (snake.getSnakeBody().size() - 1); i++) {
+            if (snake.getFirst().getX() == snake.getSnakeBody().get(i).getX() && snake.getFirst().getY() == snake.getSnakeBody().get(i).getY()) {
+                return false;
+            }
+        }
         return true;
     }
 
