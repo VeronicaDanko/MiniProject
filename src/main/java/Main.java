@@ -14,7 +14,10 @@ public class Main {
         terminalFactory.setInitialTerminalSize(ts);
         Terminal terminal = terminalFactory.createTerminal();
         terminal.setCursorVisible(false);
+
+        //Create snake
         List<Position> snakeBody2 = new ArrayList<>();
+        snakeBody2.add(new Position(15,15));
         snakeBody2.add(new Position(15, 16));
         snakeBody2.add(new Position(15, 17));
         Snake userSnake = new Snake(15, 15, snakeBody2);
@@ -24,8 +27,7 @@ public class Main {
         }
         terminal.flush();
 
-        terminal.setCursorPosition(userSnake.getX(), userSnake.getY());
-        terminal.putCharacter('s');
+
         // Setup gameboard
         List<Walls> walls = new ArrayList<>();
         for (int i = 0; i < 58; i++) {
