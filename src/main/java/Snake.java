@@ -18,7 +18,7 @@ public class Snake extends Position {
         return firstPosition;
     }
     public Position getLast() {
-        int lastIndex = snakeBody.lastIndexOf(snakeBody);
+        int lastIndex = snakeBody.size()-1;
         Position lastPosition = snakeBody.get(lastIndex);
         return lastPosition;
     }

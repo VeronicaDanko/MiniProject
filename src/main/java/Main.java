@@ -102,7 +102,7 @@ public class Main {
 
     private static boolean isSnakeAlive(Snake snake, List<Walls> walls) {
         for (Walls wall : walls) {
-            if(wall.getX() == snake.getX() && wall.getY() == snake.getY()) {
+            if(wall.getX() == snake.getFirst().getX() && wall.getY() == snake.getFirst().getY()) {
                 return false;
             }
         }
