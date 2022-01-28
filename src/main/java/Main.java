@@ -20,9 +20,9 @@ public class Main {
         //Create snake
         List<Position> snakeBody2 = new ArrayList<>();
         Food food = new Food(0,0);
-        snakeBody2.add(new Position(15,15));
-        snakeBody2.add(new Position(15, 16));
-        snakeBody2.add(new Position(15, 17));
+        snakeBody2.add(0, new Position(15,15));
+        snakeBody2.add(1, new Position(15, 16));
+        snakeBody2.add(2, new Position(15, 17));
         Snake userSnake = new Snake(15, 15, snakeBody2);
         food.generateFood(terminal, userSnake);
         for (Position snakePosition : userSnake.getSnakeBody()){
@@ -30,6 +30,8 @@ public class Main {
             terminal.putCharacter('S');
         }
         terminal.flush();
+
+        int score = 0;
 
 
         // Setup gameboard
@@ -64,7 +66,7 @@ public class Main {
                 index++;
                 if (index % 100 == 0) {
                     if (latestKeyStroke != null) {
-                        handlePlayer(userSnake, latestKeyStroke, terminal, food);
+                        handlePlayer(userSnake, latestKeyStroke, terminal, food, score);
 
                         if(!isSnakeAlive(userSnake, walls)){
                             terminal.close(); }
@@ -82,8 +84,8 @@ public class Main {
         }
 
     }
-    private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal, Food food) throws Exception {
-        int score = 0;
+    private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal, Food food, int score) throws Exception {
+
         Position oldPosition = snake.getLast();
         Position firstPosition = snake.getFirst();
         switch (keyStroke.getKeyType()) {
@@ -130,14 +132,19 @@ public class Main {
         terminal.setCursorPosition(snake.getFirst().getX(), snake.getFirst().getY());
         terminal.putCharacter('S');
 
-        String s = String.valueOf(score);
-        char[] num = s.toCharArray();
-        for (int i = 3; i <= num.length; i++) {
-            terminal.setCursorPosition(i ,3);
-            terminal.putCharacter(num[i - 3]);
-            terminal.flush();
-        }
 
+        String message = "SCORE";
+        for (int i = 0; i < message.length(); i++) {
+            terminal.setCursorPosition(i+3, 2);
+            terminal.putCharacter(message.charAt(i));
+        }
+        terminal.flush();
+
+        String s = String.valueOf(score);
+        for (int i = 0; i <= s.length() - 1; i++) {
+            terminal.setCursorPosition(i + 3,3);
+            terminal.putCharacter(s.charAt(i));
+        }
         terminal.flush();
     }
 
