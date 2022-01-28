@@ -14,6 +14,8 @@ public class Main {
         Terminal terminal = terminalFactory.createTerminal();
         terminal.setCursorVisible(false);
 
+
+
         // Setup gameboard
         List<Walls> walls = new ArrayList<>();
         for (int i = 0; i < 58; i++) {
