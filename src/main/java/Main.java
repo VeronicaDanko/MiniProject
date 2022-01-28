@@ -50,7 +50,7 @@ public class Main {
 
         KeyStroke latestKeyStroke = null;
 
-        /*boolean continueReadingInput = true;
+        boolean continueReadingInput = true;
         while (continueReadingInput) {
 
             int index = 0;
@@ -59,7 +59,7 @@ public class Main {
                 index++;
                 if (index % 100 == 0) {
                     if (latestKeyStroke != null) {
-                        handlePlayer(snake, latestKeyStroke, terminal);
+                        handlePlayer(userSnake, latestKeyStroke, terminal);
                     }
                 }
 
@@ -75,26 +75,27 @@ public class Main {
 
     }
     private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal) throws Exception {
-        Position oldPosition = new Position(snake.getX(), snake.getY());
+        Position oldPosition = snake.getLast();
+        Position firstPosition = snake.getFirst();
         switch (keyStroke.getKeyType()) {
             case ArrowDown:
-                snake.getY() += 1;
+                snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()+1));
                 break;
             case ArrowUp:
-                snake.getY() -= 1;
+                snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()-1));
                 break;
             case ArrowLeft:
-                snake.getX() -=1;
+               // snake.getX() -=1;
                 break;
             case ArrowRight:
-                snake.getX() +=1;
+               // snake.getX() +=1;
                 break;
         }
         terminal.setCursorPosition(oldPosition.getX(), oldPosition.getY());
         terminal.putCharacter(' ');
 
         terminal.setCursorPosition(snake.getX(), snake.getY());
-        terminal.putCharacter('\u263a');
+        terminal.putCharacter('S');
 
         terminal.flush();
     }
@@ -105,6 +106,6 @@ public class Main {
                 return false;
             }
         }
-        return true;*/
+        return true;
     }
 }

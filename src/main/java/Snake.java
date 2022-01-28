@@ -13,7 +13,15 @@ public class Snake extends Position {
         return snakeBody;
     }
 
-
+    public Position getFirst() {
+        Position firstPosition = snakeBody.get(0);
+        return firstPosition;
+    }
+    public Position getLast() {
+        int lastIndex = snakeBody.lastIndexOf(snakeBody);
+        Position lastPosition = snakeBody.get(lastIndex);
+        return lastPosition;
+    }
 
 
 }
