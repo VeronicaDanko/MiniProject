@@ -22,5 +22,10 @@ public class Main {
             terminal.putCharacter(wall.getBLOCK());
             terminal.flush();
         }
+
+
+
+
+
     }
 }
