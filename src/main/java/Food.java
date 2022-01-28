@@ -1,3 +1,7 @@
+import com.googlecode.lanterna.terminal.Terminal;
+
+import java.util.Random;
+
 public class Food extends Position{
     final char heart = '\u2665';
 
@@ -5,5 +9,19 @@ public class Food extends Position{
         super(x, y);
     }
 
-    public char getHeart() {return heart;}
+    public char getHeart() {
+        return heart;
+    }
+
+    public Food generateFood(Terminal terminal) throws Exception {
+        Random random = new Random();
+        int foodY = random.nextInt(6, 29);
+        int foodX = random.nextInt(1, 57);
+        this.setX(foodX);
+        this.setY(foodY);
+        terminal.setCursorPosition(foodX, foodY);
+        terminal.putCharacter(this.getHeart());
+        terminal.flush();
+        return this;
+    }
 }
