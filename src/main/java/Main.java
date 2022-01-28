@@ -50,7 +50,7 @@ public class Main {
             terminal.flush();
         }
 
-        generateFood(terminal);
+        Food food = generateFood(terminal);
 
         //mat får inte dyka upp på orm - hur löser vi detta?
         //äpple ska försvinna när äpplet äts av orm
@@ -72,7 +72,7 @@ public class Main {
                 index++;
                 if (index % 100 == 0) {
                     if (latestKeyStroke != null) {
-                        handlePlayer(userSnake, latestKeyStroke, terminal);
+                        handlePlayer(userSnake, latestKeyStroke, terminal, food);
                     }
                 }
 
@@ -87,21 +87,41 @@ public class Main {
         }
 
     }
-    private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal) throws Exception {
+    private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal, Food food) throws Exception {
         Position oldPosition = snake.getLast();
         Position firstPosition = snake.getFirst();
         switch (keyStroke.getKeyType()) {
             case ArrowDown:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()+1));
+                if(snakeEatApple(food, snake) == false) {
+                    snake.getSnakeBody().remove(oldPosition);
+                } else {
+                    generateFood(terminal);
+                }
                 break;
             case ArrowUp:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()-1));
+                if(snakeEatApple(food, snake) == false) {
+                    snake.getSnakeBody().remove(oldPosition);
+                } else {
+                    generateFood(terminal);
+                }
                 break;
             case ArrowLeft:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()-1, firstPosition.getY()));
+                if(snakeEatApple(food, snake) == false) {
+                    snake.getSnakeBody().remove(oldPosition);
+                } else {
+                    generateFood(terminal);
+                }
                 break;
             case ArrowRight:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()+1, firstPosition.getY()));
+                if(snakeEatApple(food, snake) == false) {
+                    snake.getSnakeBody().remove(oldPosition);
+                } else {
+                    generateFood(terminal);
+                }
                 break;
         }
         terminal.setCursorPosition(oldPosition.getX(), oldPosition.getY());
@@ -121,7 +141,7 @@ public class Main {
         }
         return true;
     }
-    public static void generateFood(Terminal terminal) throws Exception {
+    public static Food generateFood(Terminal terminal) throws Exception {
         Random random = new Random();
         int foodY = random.nextInt(6, 29);
         int foodX = random.nextInt(1, 57);
@@ -129,5 +149,12 @@ public class Main {
         terminal.setCursorPosition(food.getX(), food.getY());
         terminal.putCharacter(food.getHeart());
         terminal.flush();
+        return food;
+    }
+    public static boolean snakeEatApple(Food food, Snake snake) {
+        if(food.getX() == snake.getFirst().getX() && food.getY() == snake.getFirst().getY()) {
+            return true;
+        }
+        return false;
     }
 }
