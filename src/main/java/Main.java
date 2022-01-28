@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -14,9 +15,18 @@ public class Main {
         terminalFactory.setInitialTerminalSize(ts);
         Terminal terminal = terminalFactory.createTerminal();
         terminal.setCursorVisible(false);
+        List<Position> snakeBody2 = new ArrayList<>();
+        snakeBody2.add(new Position(15, 16));
+        snakeBody2.add(new Position(15, 17));
+        Snake userSnake = new Snake(15, 15, snakeBody2);
+        for (Position snakePosition : userSnake.getSnakeBody()){
+            terminal.setCursorPosition(snakePosition.getX(), snakePosition.getY());
+            terminal.putCharacter('S');
+        }
+        terminal.flush();
 
-
-
+        terminal.setCursorPosition(userSnake.getX(), userSnake.getY());
+        terminal.putCharacter('s');
         // Setup gameboard
         List<Walls> walls = new ArrayList<>();
         for (int i = 0; i < 58; i++) {
@@ -48,7 +58,7 @@ public class Main {
 
         KeyStroke latestKeyStroke = null;
 
-        boolean continueReadingInput = true;
+        /*boolean continueReadingInput = true;
         while (continueReadingInput) {
 
             int index = 0;
@@ -103,6 +113,6 @@ public class Main {
                 return false;
             }
         }
-        return true;
+        return true;*/
     }
 }
