@@ -19,11 +19,11 @@ public class Main {
         //Create snake
         List<Position> snakeBody2 = new ArrayList<>();
         Food food = new Food(0,0);
-        food.generateFood(terminal);
         snakeBody2.add(new Position(15,15));
         snakeBody2.add(new Position(15, 16));
         snakeBody2.add(new Position(15, 17));
         Snake userSnake = new Snake(15, 15, snakeBody2);
+        food.generateFood(terminal, userSnake);
         for (Position snakePosition : userSnake.getSnakeBody()){
             terminal.setCursorPosition(snakePosition.getX(), snakePosition.getY());
             terminal.putCharacter('S');
@@ -94,7 +94,7 @@ public class Main {
             case ArrowDown:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()+1));
                 if(snakeEatApple(food, snake)) {
-                    food.generateFood(terminal);
+                    food.generateFood(terminal, snake);
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
@@ -102,7 +102,7 @@ public class Main {
             case ArrowUp:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()-1));
                 if(snakeEatApple(food, snake)) {
-                    food.generateFood(terminal);
+                    food.generateFood(terminal, snake);
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
@@ -110,7 +110,7 @@ public class Main {
             case ArrowLeft:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()-1, firstPosition.getY()));
                 if(snakeEatApple(food, snake)) {
-                    food.generateFood(terminal);
+                    food.generateFood(terminal, snake);
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
@@ -118,7 +118,7 @@ public class Main {
             case ArrowRight:
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()+1, firstPosition.getY()));
                 if(snakeEatApple(food, snake)) {
-                    food.generateFood(terminal);
+                    food.generateFood(terminal, snake);
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
