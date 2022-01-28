@@ -85,16 +85,16 @@ public class Main {
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()-1));
                 break;
             case ArrowLeft:
-               // snake.getX() -=1;
+                snake.getSnakeBody().add(0,new Position(firstPosition.getX()-1, firstPosition.getY()));
                 break;
             case ArrowRight:
-               // snake.getX() +=1;
+                snake.getSnakeBody().add(0,new Position(firstPosition.getX()+1, firstPosition.getY()));
                 break;
         }
         terminal.setCursorPosition(oldPosition.getX(), oldPosition.getY());
         terminal.putCharacter(' ');
 
-        terminal.setCursorPosition(snake.getX(), snake.getY());
+        terminal.setCursorPosition(snake.getFirst().getX(), snake.getFirst().getY());
         terminal.putCharacter('S');
 
         terminal.flush();
