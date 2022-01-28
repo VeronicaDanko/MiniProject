@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
         TerminalSize ts = new TerminalSize(58, 30);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
@@ -49,22 +50,12 @@ public class Main {
             terminal.flush();
         }
 
-        //RandomHeart
-
-        Random random = new Random();
-        int foodY = random.nextInt(6, 29);
-        int foodX = random.nextInt(1, 57);
-        Food food = new Food(foodX, foodY);
-        terminal.setCursorPosition(food.getX(), food.getY());
-        terminal.putCharacter(food.getHeart());
-        terminal.flush();
+        generateFood(terminal);
 
         //mat får inte dyka upp på orm - hur löser vi detta?
         //äpple ska försvinna när äpplet äts av orm
         //äpple ska dyka upp igen när det ätits upp
         //orm ska växa när äpplet äts
-
-
 
 
 
@@ -129,5 +120,14 @@ public class Main {
             }
         }
         return true;
+    }
+    public static void generateFood(Terminal terminal) throws Exception {
+        Random random = new Random();
+        int foodY = random.nextInt(6, 29);
+        int foodX = random.nextInt(1, 57);
+        Food food = new Food(foodX, foodY);
+        terminal.setCursorPosition(food.getX(), food.getY());
+        terminal.putCharacter(food.getHeart());
+        terminal.flush();
     }
 }
