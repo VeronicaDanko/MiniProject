@@ -52,6 +52,13 @@ public class Main {
         Random random = new Random();
         Character c = ' '; //gör att äpplet försvinner
         Food food = new Food(5, 5);
+        int foodX = random.nextInt(1, 29);
+        int foodY = random.nextInt(1, 57); //mat får inte dyka upp på orm - hur löser vi detta?
+        terminal.setCursorPosition(foodX, foodY);
+        terminal.putCharacter(food.getHeart());
+
+
+
 
 
 
