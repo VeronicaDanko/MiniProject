@@ -31,8 +31,6 @@ public class Main {
         }
         terminal.flush();
 
-        int score = 0;
-
 
         // Setup gameboard
         List<Walls> walls = new ArrayList<>();
@@ -66,7 +64,7 @@ public class Main {
                 index++;
                 if (index % 100 == 0) {
                     if (latestKeyStroke != null) {
-                        handlePlayer(userSnake, latestKeyStroke, terminal, food, score);
+                        handlePlayer(userSnake, latestKeyStroke, terminal, food);
 
                         if(!isSnakeAlive(userSnake, walls)){
                             terminal.close(); }
@@ -84,7 +82,7 @@ public class Main {
         }
 
     }
-    private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal, Food food, int score) throws Exception {
+    private static void handlePlayer(Snake snake, KeyStroke keyStroke,Terminal terminal, Food food) throws Exception {
 
         Position oldPosition = snake.getLast();
         Position firstPosition = snake.getFirst();
@@ -93,7 +91,6 @@ public class Main {
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()+1));
                 if(snakeEatApple(food, snake)) {
                     food.generateFood(terminal, snake);
-                    score = score + 100;
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
@@ -102,7 +99,6 @@ public class Main {
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX(), firstPosition.getY()-1));
                 if(snakeEatApple(food, snake)) {
                     food.generateFood(terminal, snake);
-                    score = score + 100;
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
@@ -111,7 +107,6 @@ public class Main {
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()-1, firstPosition.getY()));
                 if(snakeEatApple(food, snake)) {
                     food.generateFood(terminal, snake);
-                    score = score + 100;
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
@@ -120,7 +115,6 @@ public class Main {
                 snake.getSnakeBody().add(0,new Position(firstPosition.getX()+1, firstPosition.getY()));
                 if(snakeEatApple(food, snake)) {
                     food.generateFood(terminal, snake);
-                    score = score + 100;
                 } else {
                     snake.getSnakeBody().remove(oldPosition);
                 }
@@ -140,6 +134,7 @@ public class Main {
         }
         terminal.flush();
 
+        int score = snake.getSnakeBody().size() * 100 - 300;
         String s = String.valueOf(score);
         for (int i = 0; i <= s.length() - 1; i++) {
             terminal.setCursorPosition(i + 3,3);
