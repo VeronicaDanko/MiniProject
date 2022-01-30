@@ -4,6 +4,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.sun.jdi.Value;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -67,8 +68,12 @@ public class Main {
                         handlePlayer(userSnake, latestKeyStroke, terminal, food);
 
                         if (!isSnakeAlive(userSnake, walls)) {
+                            Position gameOverPosition = new Position(20, 15);
+                            printText(terminal, "G A M E   O V E R", gameOverPosition);
+                            Position scorePosition =  new Position(20, 18);
+                            // Lägg till score här kanske?
+                            printText(terminal, "S C O R E: " + 0, scorePosition);
                             continueReadingInput = false;
-                            gameEnd(terminal);
                             break;
                         }
                     }
@@ -163,11 +168,11 @@ public class Main {
         return true;
     }
 
-    private static void gameEnd(Terminal terminal) throws Exception {
-        terminal.setCursorPosition(20, 20);
-        terminal.putCharacter('E');
-        terminal.flush();
-    }
+//    private static void gameEnd(Terminal terminal) throws Exception {
+//        terminal.setCursorPosition(20, 20);
+//        terminal.putCharacter('E');
+//        terminal.flush();
+//    }
 
     public static boolean snakeEatApple(Food food, Snake snake) {
         if(food.getX() == snake.getFirst().getX() && food.getY() == snake.getFirst().getY()) {
@@ -175,5 +180,13 @@ public class Main {
         } else {
             return false;
         }
+    }
+
+    public static void printText(Terminal terminal, String text, Position startPosition) throws IOException {
+        for (int i = 0; i < text.length(); i++) {
+            terminal.setCursorPosition(i + startPosition.getX(), startPosition.getY());
+            terminal.putCharacter(text.charAt(i));
+        }
+        terminal.flush();
     }
 }
