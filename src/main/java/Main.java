@@ -66,8 +66,11 @@ public class Main {
                     if (latestKeyStroke != null) {
                         handlePlayer(userSnake, latestKeyStroke, terminal, food);
 
-                        if(!isSnakeAlive(userSnake, walls)){
-                            terminal.close(); }
+                        if (!isSnakeAlive(userSnake, walls)) {
+                            continueReadingInput = false;
+                            gameEnd(terminal);
+                            break;
+                        }
                     }
                 }
 
@@ -158,6 +161,12 @@ public class Main {
             return false;
         }
         return true;
+    }
+
+    private static void gameEnd(Terminal terminal) throws Exception {
+        terminal.setCursorPosition(20, 20);
+        terminal.putCharacter('E');
+        terminal.flush();
     }
 
     public static boolean snakeEatApple(Food food, Snake snake) {
