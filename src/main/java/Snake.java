@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class Snake extends Position {
@@ -17,16 +16,15 @@ public class Snake extends Position {
         Position firstPosition = snakeBody.get(0);
         return firstPosition;
     }
+
     public Position getPrevious() {
         Position previousPosition = snakeBody.get(1);
         return previousPosition;
     }
+
     public Position getLast() {
-        int lastIndex = snakeBody.size()-1;
+        int lastIndex = snakeBody.size() - 1;
         Position lastPosition = snakeBody.get(lastIndex);
         return lastPosition;
     }
-
-
-
 }
