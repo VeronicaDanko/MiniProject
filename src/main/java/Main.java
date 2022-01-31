@@ -1,4 +1,5 @@
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -72,7 +73,8 @@ public class Main {
                             printText(terminal, "G A M E   O V E R", gameOverPosition);
                             Position scorePosition =  new Position(20, 18);
                             // Lägg till score här kanske?
-                            printText(terminal, "S C O R E: " + 0, scorePosition);
+
+                            printText(terminal, "S C O R E: " + scoreCount(terminal, userSnake), scorePosition);
                             continueReadingInput = false;
                             break;
                         }
@@ -135,6 +137,7 @@ public class Main {
         terminal.putCharacter('S');
 
 
+
         String message = "SCORE";
         for (int i = 0; i < message.length(); i++) {
             terminal.setCursorPosition(i+3, 2);
@@ -142,14 +145,21 @@ public class Main {
         }
         terminal.flush();
 
+        scoreCount(terminal, snake);
+
+    }
+
+    private static String scoreCount(Terminal terminal, Snake snake) throws Exception{
         int score = snake.getSnakeBody().size() * 100 - 300;
         String s = String.valueOf(score);
         for (int i = 0; i <= s.length() - 1; i++) {
             terminal.setCursorPosition(i + 3,3);
             terminal.putCharacter(s.charAt(i));
-        }
-        terminal.flush();
+            terminal.flush();
+        } return s;
     }
+
+
 
     private static boolean isSnakeAlive(Snake snake, List<Walls> walls) {
         for (Walls wall : walls) {
@@ -168,11 +178,6 @@ public class Main {
         return true;
     }
 
-//    private static void gameEnd(Terminal terminal) throws Exception {
-//        terminal.setCursorPosition(20, 20);
-//        terminal.putCharacter('E');
-//        terminal.flush();
-//    }
 
     public static boolean snakeEatApple(Food food, Snake snake) {
         if(food.getX() == snake.getFirst().getX() && food.getY() == snake.getFirst().getY()) {
@@ -182,10 +187,14 @@ public class Main {
         }
     }
 
-    public static void printText(Terminal terminal, String text, Position startPosition) throws IOException {
+    public static void printText(Terminal terminal, String text, Position startPosition) throws IOException, InterruptedException {
+        //terminal.setForegroundColor(new TextColor.RGB(255,0,0));
         for (int i = 0; i < text.length(); i++) {
             terminal.setCursorPosition(i + startPosition.getX(), startPosition.getY());
             terminal.putCharacter(text.charAt(i));
+            Thread.sleep(50);
+            terminal.flush();
+
         }
         terminal.flush();
     }
